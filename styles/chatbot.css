@@ -210,6 +210,7 @@ body, html {
   padding: 16px 10px;
   border-radius: 10px;
   font-size: 13px;
+  word-break: break-word;
   background-color: #159AFF;
   color: #fff;
 }
@@ -254,6 +255,7 @@ body, html {
   padding: 16px 10px;
   border-radius: 10px;
   font-size: 13px;
+  word-break: break-word;
   background-color: #E4E6EB;
 }
 

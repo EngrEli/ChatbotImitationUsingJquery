@@ -10,6 +10,7 @@ $light-grey: #E4E6EB;
     padding:16px 10px;
     border-radius: 10px;
     font-size: 13px;
+    word-break: break-word;
 }
 @mixin message-box-container {
     display: flex;

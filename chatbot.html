@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles/chatbot.css" >
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <title>Chatbots</title>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-head">
+            <div class="chat-head-text"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""> <p>Chat Bot</p></div> 
+            <span class="icon-head-container"></i><i class="fas fa-info-circle"></i></span>
+        </div>
+        <div class="chat-body">
+            <div class="intro-container">
+                <img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt="bot-profile">
+                <div class="bot-name">Chatbot</div> 
+                <div class="bot-intro-sub">Typically replies instantly<br>Coding Website</div>
+
+            </div>
+            <div class="intro-bottom">
+                <div class="bot-intro-sub">Hi!</div>
+                <div class="bot-intro-sub">When you tap Get Started, Chatbot will see your public info.</div>
+                <br><button class="bot-start-button">Get Started</button>
+            </div>
+        </div>
+        <div class="input">
+            <input type="text" id="textbox" placeholder="Aa"><i class="fas fa-location-arrow"></i>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function scrollDown(){
+        // $(".chat-body").animate({scrollTop: $(".chat-body").height()});
+        $(".chat-body").animate({scrollTop: $(".chat-body").get(0).scrollHeight});
+    }
+    function clearInputValue(){
+        $("#textbox").val("");
+    }
+    function disableInput(){
+        $("#textbox").prop( "disabled", true );
+    }
+
+    // get time
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+// -------------- -------------- -------------- -------------- -------------- -------------- ---------------------------- -------------- -------------- -------------- -------------- -------------- --------------
+    // disable input so that the user cant type before the initial bot message
+    disableInput()
+// GET STARTED
+    $("button.bot-start-button").click(function() {
+        $("#textbox").prop( "disabled", false );
+        // append bot message for new chat
+//1. GET STARTED user message
+        $(".chat-body").append(`
+                                <div class="user-message" style="margin-top:235px!important">
+                                    <div class="time">${formatAMPM(new Date)}</div>
+                                    <i class="fas fa-user"></i>
+                                    <div class="message-box">
+                                    <div class="message-content">Get Started</div>
+                                    </div>
+                                </div>`);
+//2. BOT reply to get started
+        setTimeout(function() {
+            $(".chat-body").append(`<div class="bot-message">
+                <div class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                <div class="message-box">
+                   <div class="message-content">Hello there , before we begin , please tell me your name </div>
+                </div>
+            </div>
+            `);  
+            // scroll to bottom when there is a new message
+            scrollDown();
+            // focus on text box
+            $("#textbox").focus();
+        }, 1000);
+        $(".intro-bottom").css("display","none");
+    });
+// -------------- -------------- -------------- -------------- -------------- -------------- ---------------------------- -------------- -------------- -------------- -------------- -------------- --------------
+    // username function is what runs when the user enters his/her name
+    function inputUserName(){
+        // save the value of the textbox inside a variable and capitalize its 1st letter because its a name
+        var userName = $("#textbox").val().charAt(0).toUpperCase() + $("#textbox").val().substr(1).toLowerCase();
+
+        var welcomeText = "";
+
+        // determine the greeting base on the hour
+        var date = new Date();
+        if(date.getHours() <= 11 && date.getMinutes() <= 59 ){
+            welcomeText = "Good morning"
+        }else if(date.getHours() <= 17 && date.getMinutes() <= 59){
+            welcomeText = "Good afternoon"
+        }else if(date.getHours() <= 23 && date.getMinutes() <= 59){
+            welcomeText = "Good evening"
+        }
+        // determine the day
+        var day = "";
+        if(date.getDay()=== 0 ){
+            day = "Sunday";
+        }else if(date.getDay()=== 1 ){
+            day = "Monday";
+        }else if(date.getDay()=== 2){
+            day = "Tuesday";
+        }else if(date.getDay()=== 3){
+            day = "Wednesday";
+        }else if(date.getDay()=== 4){
+            day = "Thursday";
+        }else if(date.getDay()=== 5){
+            day = "Friday";
+        }else if(date.getDay()=== 6){
+            day = "Saturday";
+        }
+        // if the user does not type any name on the input, the send function will not trigger
+        if(userName){
+// 3. USER chats name
+            setTimeout(function() {
+                $(".chat-body").append(`<div class="user-message">
+                    <i class="fas fa-user"></i>
+                    <div class="message-box">
+                    <div class="message-content">${userName}</div> 
+                    </div>
+                </div>
+                `);  
+            }, 200);
+                // clear input box
+            clearInputValue();
+            scrollDown();
+            // bot reply
+            setTimeout(function() {
+// 4.BOT chat uses the user's name for greeting
+                $(".chat-body").append(`<div class="bot-message">
+                    <div class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                    <div class="message-box">
+                    <div class="message-content">${welcomeText} ${userName}! Happy ${day} </div>
+                    </div>
+                </div>
+                `);  
+                // disable input so that user can't type
+                disableInput();
+                scrollDown();
+                    setTimeout(function() {
+// 5.BOT chat ask user to choose a question after 1second
+                    $(".chat-body").append(`<div class="bot-message">
+                            <div style="visibility:hidden" class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                            <div class="message-box">
+                            <div class="message-content">Please pick a question you want to ask</div>
+                            </div>
+                        </div>
+                        `);  
+                    scrollDown();
+                    }, 1000);
+                    setTimeout(function() {
+// 6. BOT chat gives user a 3 button selection after 2 second
+                        $(".chat-body").append(`
+                        <div class="buttons-selection">
+                            <button class="bot-button first-q" onClick="questionSelect('first-q');">What is this?</button>
+                            <button class="bot-button second-q" onClick="questionSelect('second-q');">Where can I see its code? </button>
+                            <button class="bot-button third-q" onClick="questionSelect('third-q');">How can I contact Eli Lumilay?</button>
+                        </div>`);
+                        scrollDown();
+                    }, 2000);
+            }, 1000);
+        }
+    }
+
+    $("input#textbox").keypress(function(e) {
+        if(e.which == 13) {
+        // call input username function when the user press enter on the input box
+            inputUserName();
+        }
+    });
+   
+    $(".fas.fa-location-arrow").click(function(){
+        // call input username function when the user clicks the send button
+        inputUserName();
+    });
+// on click makes the appended element activate click function
+// pass parameter from the button then returns a question depending on what button was clicked
+function questionSelect(question){
+    var questionQuestion = '';
+    var questionAnswer = '';
+    if(question==='first-q'){
+        questionQuestion = 'What is this'
+        questionAnswer = `This is a chatbot imitation made by Eli Lumilay. It is made using HTML , SCSS and Jquery. Append function was mostly used in this project together with the click event`
+    }else if(question==='second-q'){
+        questionQuestion = 'Where can I see its code?'
+        questionAnswer = `You can see its code via github.`
+    }else if(question==='third-q'){
+        questionQuestion = 'How can I contact Eli Lumilay?'
+        questionAnswer = `You can contact me:<br> Via <b>LinkedIn</b>: <br> <a target="_blank" href="https://www.linkedin.com/in/elizer-lumilay-front-end">https://www.linkedin.com/in/elizer-lumilay-front-end</a> <br> Via Email: elizerlumilay@gmail.com <br> Or call : 09511280486`
+    }
+    disableInput();
+// 7. USER clicks and sends the question
+    $(".chat-body").on('click',`.${question}`,function(){
+        $(".chat-body").append(`<div id="question" class="user-message">
+                        <i class="fas fa-user"></i>
+                        <div class="message-box">
+                        <div class="message-content">${questionQuestion}</div>
+                        </div>
+                    </div>
+                    `);
+        scrollDown();
+// 8. BOT shows the answer to the picked question
+        setTimeout(function() {
+            $(".chat-body").append(`<div id="answer" class="bot-message">
+                    <div class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                    <div class="message-box">
+                    <div class="message-content">${questionAnswer}</div>
+                    </div>
+                </div>
+                `);
+// 9. BOT ask the same question to the user
+                setTimeout(function() {
+                    $(".chat-body").append(`<div id="follow-up" class="bot-message">
+                            <div style="visibility:hidden" class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                            <div class="message-box">
+                            <div class="message-content">Please pick a question you want to ask</div>
+                            </div>
+                        </div>
+                        `);  
+                    scrollDown();
+                    }, 1000);
+                    setTimeout(function() {
+                        // remove all the buttons prior to the conversation
+                        $(".buttons-selection").remove();
+                        // then add another button to the last part of the message
+                        $(".chat-body").append(`
+                        <div class="buttons-selection">
+                            <button class="bot-button first-q" onClick="questionSelect('first-q');">What is this?</button>
+                            <button class="bot-button second-q" onClick="questionSelect('second-q');">Where can I see its code? </button>
+                            <button class="bot-button third-q" onClick="questionSelect('third-q');">How can I contact Eli Lumilay?</button>
+                        </div>`);
+                        // disable input so that user can't type
+                        scrollDown();
+                    }, 2000);
+            scrollDown();        
+        }, 1000);
+    });
+}
+
+</script>

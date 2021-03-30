@@ -61,6 +61,10 @@ body, html {
   top: 5px;
 }
 
+.chat-container .chat-head .icon-head-container .fas.fa-info-circle {
+  cursor: pointer;
+}
+
 .chat-container .chat-head .icon-head-container .fas {
   margin: 0 8px;
 }

@@ -3,6 +3,7 @@
   padding: 0;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body, html {
@@ -190,6 +191,7 @@ body, html {
   color: #fff;
   background-color: #159AFF;
   margin-left: 15px;
+  display: none;
 }
 
 .chat-container .chat-body .user-message .message-box {

@@ -24,6 +24,8 @@ $light-grey: #E4E6EB;
     padding:0;
     margin:0;
     font-family: 'Roboto', sans-serif;
+    // remove the tap highlight when clicking buttons on mobile
+    -webkit-tap-highlight-color:transparent;
 }
 body,html{
     height: 100%;
@@ -159,11 +161,13 @@ body,html{
                 color:#65676b;
                 font-size: 10px;
             }
+            // I display none the user icon since having no icon is much same with messenger
             .fas.fa-user{
                 @include profile-icon;
                 color:#fff;
                 background-color:$dark-blue;
                 margin-left: 15px;
+                display:none;
             }
             .message-box{
                 @include message-box-container;

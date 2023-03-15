@@ -17,12 +17,12 @@
 <body>
     <div class="chat-container">
         <div class="chat-head">
-            <div class="chat-head-text"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""> <p>Chat Bot</p></div> 
+            <div class="chat-head-text"><img src="chatbot.png" alt=""> <p>Chat Bot</p></div> 
             <span class="icon-head-container"></i><i class="fas fa-info-circle"></i></span>
         </div>
         <div class="chat-body">
             <div class="intro-container">
-                <img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt="bot-profile">
+                <img src="chatbot.png" alt="bot-profile">
                 <div class="bot-name">Chatbot</div> 
                 <div class="bot-intro-sub">Typically replies instantly<br>Coding Website</div>
 
@@ -82,9 +82,9 @@
 //2. BOT reply to get started
         setTimeout(function() {
             $(".chat-body").append(`<div class="bot-message">
-                <div class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                <div class="chat-head-img"><img src="chatbot.png" alt=""></div> 
                 <div class="message-box">
-                   <div class="message-content">Hello there , before we begin , please tell me your name </div>
+                   <div class="message-content">Hello there, before we begin, please tell me your name.</div>
                 </div>
             </div>
             `);  
@@ -99,8 +99,7 @@
     // username function is what runs when the user enters his/her name
     function inputUserName(){
         // save the value of the textbox inside a variable and capitalize its 1st letter because its a name
-        var userName = $("#textbox").val().charAt(0).toUpperCase() + $("#textbox").val().substr(1).toLowerCase();
-
+        var userName = $("#textbox").val().replace(/<[^>]+>/gim, '').charAt(0).toUpperCase() + $("#textbox").val().replace(/<[^>]+>/gim, '').substr(1).toLowerCase();
         var welcomeText = "";
 
         // determine the greeting base on the hour
@@ -141,14 +140,14 @@
                 </div>
                 `);  
             }, 200);
-                // clear input box
+            // clear input box
             clearInputValue();
             scrollDown();
             // bot reply
             setTimeout(function() {
 // 4.BOT chat uses the user's name for greeting
                 $(".chat-body").append(`<div class="bot-message">
-                    <div class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                    <div class="chat-head-img"><img src="chatbot.png" alt=""></div> 
                     <div class="message-box">
                     <div class="message-content">${welcomeText} ${userName}! Happy ${day} </div>
                     </div>
@@ -160,7 +159,7 @@
                     setTimeout(function() {
 // 5.BOT chat ask user to choose a question after 1second
                     $(".chat-body").append(`<div class="bot-message">
-                            <div style="visibility:hidden" class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                            <div style="visibility:hidden" class="chat-head-img"><img src="chatbot.png" alt=""></div> 
                             <div class="message-box">
                             <div class="message-content">Please pick a question you want to ask</div>
                             </div>
@@ -188,7 +187,7 @@
             inputUserName();
         }
     });
-   
+
     $(".fas.fa-location-arrow").click(function(){
         // call input username function when the user clicks the send button
         inputUserName();
@@ -199,8 +198,8 @@ function questionSelect(question){
     var questionQuestion = '';
     var questionAnswer = '';
     if(question==='first-q'){
-        questionQuestion = 'What is this'
-        questionAnswer = `This is a chatbot imitation made by Eli Lumilay. It is made using HTML , SCSS and Jquery. Append function was mostly used in this project together with the click event`
+        questionQuestion = 'What is this?'
+        questionAnswer = `This is a chatbot UI imitation made by Eli Lumilay. It is made using HTML, SCSS and Jquery. Append function was mostly used in this project together with the click event`
     }else if(question==='second-q'){
         questionQuestion = 'Where can I see its code?'
         questionAnswer = `You can see its code via github: <a href="https://github.com/EngrEli/ChatbotImitationUsingJquery" target="_blank"> https://github.com/EngrEli/ChatbotImitationUsingJquery </a>`
@@ -222,7 +221,7 @@ function questionSelect(question){
 // 8. BOT shows the answer to the picked question
         setTimeout(function() {
             $(".chat-body").append(`<div id="answer" class="bot-message">
-                    <div class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                    <div class="chat-head-img"><img src="chatbot.png" alt=""></div> 
                     <div class="message-box">
                     <div class="message-content">${questionAnswer}</div>
                     </div>
@@ -231,7 +230,7 @@ function questionSelect(question){
 // 9. BOT ask the same question to the user
                 setTimeout(function() {
                     $(".chat-body").append(`<div id="follow-up" class="bot-message">
-                            <div style="visibility:hidden" class="chat-head-img"><img src="https://www.binaryfortress.com/MediaCommon/SVGs/Product/VoiceBot.svg" alt=""></div> 
+                            <div style="visibility:hidden" class="chat-head-img"><img src="chatbot.png" alt=""></div> 
                             <div class="message-box">
                             <div class="message-content">Please pick a question you want to ask</div>
                             </div>
@@ -252,7 +251,7 @@ function questionSelect(question){
                         // disable input so that user can't type
                         scrollDown();
                     }, 2000);
-            scrollDown();        
+            scrollDown();
         }, 1000);
     });
 }
